@@ -18,7 +18,7 @@ jobs:
           paths:
             - vendor
       - persist_to_workspace:
-          root: ~/project
+          root: $CIRCLE_WORKING_DIRECTORY
           paths:
             - ./*
 
@@ -26,8 +26,9 @@ jobs:
     docker:
       - image: amazonlinux
     steps:
+      - run: pwd %% ls -R
       - attach_workspace:
-          at: ~/
+          at: $CIRCLE_WORKING_DIRECTORY
       - run:
           name: Setup AWS-CLI
           command: |
