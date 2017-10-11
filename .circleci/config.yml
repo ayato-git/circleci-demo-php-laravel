@@ -4,11 +4,11 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1.8-browsers
-    working_directors: ~/laravel
+    working_directors: ~/
     steps:
       - checkout
       - persist_to_workspace:
-          root: ~/laravel
+          root: ~/
           paths:
             - ./*
       # - run: sudo apt install -y libsqlite3-dev
@@ -26,10 +26,10 @@ jobs:
   deploy:
     docker:
       - image: amazonlinux
-    working_directory: ~/laravel
+    working_directory: ~/
     steps:
       - attach_workspace:
-          at: ~/laravel
+          at: ~/
       - run:
           name: Setup AWS-CLI
           command: |
