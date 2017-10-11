@@ -28,7 +28,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: cd ~/project
       - run:
           name: Setup AWS-CLI
           command: |
@@ -39,6 +38,7 @@ jobs:
       - deploy:
           name: Deploy to EC2
           command: |
+              cd ~/project
               aws deploy push \
                   --region ap-northeast-1 \
                   --application-name StartByCircleCI \
