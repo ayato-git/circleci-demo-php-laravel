@@ -38,10 +38,11 @@ jobs:
       - deploy:
           name: Deploy to EC2
           command: |
-              GITHUB_REPO=`echo $CIRCLE_REPOSITORY_URL | sed -e 's/git@github.com://' | sed -e 's/.git$//' `
+              aws deploy push --application-name StartByCircleCI --s3-location \
+              s3://codedeploy-for-aws-study/${CIRCLE_PROJECT_REPONAME}-CircleCI-Build-${CIRCLE_BUILD_NUM}.zip
               DEPLOYMENTID=`aws deploy create-deployment \
                   --application-name StartByCircleCI \
-                  --github-location repository=${GITHUB_REPO},commitId=${CIRCLE_SHA1} \
+                  --s3-location bucket=codedeploy-for-aws-study,key=${CIRCLE_PROJECT_REPONAME}-CircleCI-Build-${CIRCLE_BUILD_NUM}.zip,bundleType=zip \
                   --deployment-group-name ${CIRCLE_BRANCH}-group \
                   --region ap-northeast-1 \
                   --query 'deploymentId' --output text`
