@@ -18,7 +18,7 @@ jobs:
           paths:
             - vendor
       - persist_to_workspace:
-          root: ${CIRCLE_WORKING_DIRECTORY}
+          root: ~/project
           paths:
             - ./*
 
@@ -28,7 +28,7 @@ jobs:
     steps:
       - run: pwd %% ls -R
       - attach_workspace:
-          at: ${CIRCLE_WORKING_DIRECTORY}
+          at: ~/project
       - run:
           name: Setup AWS-CLI
           command: |
