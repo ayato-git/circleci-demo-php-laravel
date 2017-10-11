@@ -38,8 +38,11 @@ jobs:
       - deploy:
           name: Deploy to EC2
           command: |
-              aws deploy push --application-name StartByCircleCI --s3-location \
-              s3://codedeploy-for-aws-study/${CIRCLE_PROJECT_REPONAME}-CircleCI-Build-${CIRCLE_BUILD_NUM}.zip
+              aws deploy push \
+                  --region ap-northeast-1 \
+                  --application-name StartByCircleCI \
+                  --s3-location \
+                    s3://codedeploy-for-aws-study/${CIRCLE_PROJECT_REPONAME}-CircleCI-Build-${CIRCLE_BUILD_NUM}.zip
               DEPLOYMENTID=`aws deploy create-deployment \
                   --application-name StartByCircleCI \
                   --s3-location bucket=codedeploy-for-aws-study,key=${CIRCLE_PROJECT_REPONAME}-CircleCI-Build-${CIRCLE_BUILD_NUM}.zip,bundleType=zip \
