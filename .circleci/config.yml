@@ -4,13 +4,8 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1.8-browsers
-    working_directors: ~/
     steps:
       - checkout
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - ./*
       # - run: sudo apt install -y libsqlite3-dev
       # - run: composer self-update
       - restore_cache:
@@ -22,11 +17,14 @@ jobs:
           key: composer-v1-{{ checksum "composer.json" }}
           paths:
             - vendor
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./*
 
   deploy:
     docker:
       - image: amazonlinux
-    working_directory: ~/
     steps:
       - attach_workspace:
           at: ~/
