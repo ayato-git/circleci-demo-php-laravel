@@ -34,6 +34,7 @@ jobs:
             curl -kL https://bootstrap.pypa.io/get-pip.py | python
             pip install awscli --upgrade
             aws --version
+            ls
       - deploy:
           name: Deploy to EC2
           command: |
